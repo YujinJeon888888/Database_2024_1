@@ -5,8 +5,7 @@ CREATE TABLE SALES_LOCATION(
 	Location_State	varchar(20),
 	Location_PostCode varchar(5) ,
 	PRIMARY KEY(Location_ID),
-	CONSTRAINT Location_Unq UNIQUE(Location_Description)
-)@
+);
 
 CREATE TABLE CASHIER(
 	Cashier_ID varchar(5) NOT NULL,
@@ -17,8 +16,7 @@ CREATE TABLE CASHIER(
 	Counter_Num varchar(1) NOT NULL,
 	PRIMARY KEY(Cashier_ID,Location_ID),
 	FOREIGN KEY(Location_ID) REFERENCES SALES_LOCATION ON DELETE CASCADE,
-	CONSTRAINT  Counter_Unq UNIQUE(Location_ID, Counter_Num)
-)@
+);
 
 CREATE TABLE CUSTOMER(
 	Customer_ID varchar(6) NOT NULL,
@@ -31,15 +29,14 @@ CREATE TABLE CUSTOMER(
 	Location_ID integer,
 	PRIMARY KEY(Customer_ID),
 	FOREIGN KEY(Cashier_ID,Location_ID) REFERENCES CASHIER ON DELETE SET NULL
-)@
+);
 
 CREATE TABLE AREA(
 	Area_Code varchar(3) NOT NULL,
 	Area_Description varchar(10) NOT NULL, 
 	Price decimal(5,2) NOT NULL, 
 	PRIMARY KEY(Area_Code),
-	CONSTRAINT Area_Unq UNIQUE(Area_Description)
-)@
+);
 
 CREATE TABLE SEAT(
 	Seat_No varchar(6) NOT NULL,
@@ -48,8 +45,7 @@ CREATE TABLE SEAT(
 	Seat_Col varchar(2) NOT NULL,
 	PRIMARY KEY(Seat_No,Area_Code),
 	FOREIGN KEY(Area_Code) REFERENCES AREA ON DELETE RESTRICT,
-	CONSTRAINT Seat_Unq UNIQUE(Area_Code,Seat_Row,Seat_Col)
-)@
+);
 
 CREATE TABLE VENUE(
 	Venue_Code varchar(3) NOT NULL,
@@ -58,8 +54,7 @@ CREATE TABLE VENUE(
 	Venue_State varchar(20),
 	Venue_PostCode varchar(5),
 	PRIMARY KEY(Venue_Code),
-	CONSTRAINT Venue_Unq Unique(Venue_Description)
-)@
+);
 
 CREATE TABLE CONCERT_SHOWING(
 	Concert_Code varchar(7) NOT NULL,
@@ -70,8 +65,7 @@ CREATE TABLE CONCERT_SHOWING(
 	Venue_Code varchar(3) NOT NULL,
 	PRIMARY KEY(Concert_Code),
 	FOREIGN KEY(Venue_Code) REFERENCES VENUE ON DELETE RESTRICT,
-	CONSTRAINT Concert_Unq UNIQUE(Concert_Date, Venue_Code)
-)@
+);
 
 CREATE TABLE TICKET(
 	Trans_No varchar(8) NOT NULL,
@@ -88,8 +82,23 @@ CREATE TABLE TICKET(
 	FOREIGN KEY(Concert_Code) REFERENCES CONCERT_SHOWING ON DELETE CASCADE,
 	FOREIGN KEY(Seat_No,Area_Code) REFERENCES SEAT ON DELETE RESTRICT,
 	FOREIGN KEY(Customer_ID) REFERENCES CUSTOMER ON DELETE RESTRICT,
-	CONSTRAINT Seaq_Unq UNIQUE(Concert_Code, Seat_No, Area_Code)
-)@
+);
+
+CREATE INDEX idx_cashier_location_id ON CASHIER(Location_ID);
+
+CREATE INDEX idx_customer_cashier_location_id ON CUSTOMER(Cashier_ID, Location_ID);
+CREATE INDEX idx_customer_lastname ON CUSTOMER(Customer_LastName);
+CREATE INDEX idx_customer_phone ON CUSTOMER(Customer_Phone);
+
+CREATE INDEX idx_seat_area_code ON SEAT(Area_Code);
+
+CREATE INDEX idx_concert_showing_venue_code ON CONCERT_SHOWING(Venue_Code);
+CREATE INDEX idx_concert_showing_date ON CONCERT_SHOWING(Concert_Date);
+
+CREATE INDEX idx_ticket_concert_code ON TICKET(Concert_Code);
+CREATE INDEX idx_ticket_seat_no_area_code ON TICKET(Seat_No, Area_Code);
+CREATE INDEX idx_ticket_customer_id ON TICKET(Customer_ID);
+CREATE INDEX idx_ticket_purchased_date_time ON TICKET(Purchased_Date, Purchased_Time);
 
 
 
