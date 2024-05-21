@@ -1,5 +1,3 @@
-//JDBC import¹®
-import java.sql.*;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
