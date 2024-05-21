@@ -1,4 +1,5 @@
-
+import databases.*;
+import Dao.*;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
@@ -15,6 +16,7 @@ import java.awt.Font;
 import javax.swing.JScrollPane;
 import javax.swing.JScrollBar;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 
@@ -27,7 +29,21 @@ public class UserInterface extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	private static void print(ArrayList<SalesLocation> list) {
+		for (SalesLocation dto : list) {
+			System.out.println(dto);
+		}
+	}
 	public static void main(String[] args) {
+		//////////
+		//db연결
+		SalesLocationDao dao = new SalesLocationDao();
+		
+		System.out.println("=====전체조회=====");
+		//전체 조회해서 list에 담기
+		ArrayList<SalesLocation> list = dao.selectList();
+		print(list);
+		//////////
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
