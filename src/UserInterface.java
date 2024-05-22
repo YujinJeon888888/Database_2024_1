@@ -34,7 +34,7 @@ public class UserInterface extends JFrame {
 	 * Launch the application.
 	 */
 	private static void printTable(ArrayList<?> list) {
-		resultField.setText("");// 수정x
+		
 		for (Object dto : list) {
 			System.out.println(dto);
 				
@@ -157,38 +157,38 @@ public class UserInterface extends JFrame {
 						// System.out.println("선택됐다시마스"); 
 						String s = button.getText();// 문자열 변수를 선언하고 값을 할당
 						switch (s) {
-						    case "Area": // 빈 문자열인 경우
+						    case "Area": 
 						    	AreaDao dao = new AreaDao();
 								ArrayList<Area> list = dao.selectList(); printTable(list);
 								
 						        break;
-						    case "Cashier": // 빈 문자열인 경우
+						    case "Cashier": 
 						    	CashierDao dao2 = new CashierDao();
 								ArrayList<Cashier> list2 = dao2.selectList(); printTable(list2);
 
 						        break;
-						    case "ConcertShowing": // 빈 문자열인 경우
+						    case "ConcertShowing": 
 						    	ConcertShowingDao dao3 = new ConcertShowingDao();
 								ArrayList<ConcertShowing> list3 = dao3.selectList(); printTable(list3);
 						        break;
-						    case "Customer": // 빈 문자열인 경우
+						    case "Customer": 
 						    	CustomerDao dao4 = new CustomerDao();
 								ArrayList<Customer> list4 = dao4.selectList(); printTable(list4);
 
 						        break;
-						    case "SalesLocation": // 빈 문자열인 경우
+						    case "SalesLocation": 
 						    	SalesLocationDao dao5 = new SalesLocationDao();
 								ArrayList<SalesLocation> list5 = dao5.selectList(); printTable(list5);
 						        break;
-						    case "Seat": // 빈 문자열인 경우
+						    case "Seat": 
 						    	SeatDao dao6 = new SeatDao();
 								ArrayList<Seat> list6 = dao6.selectList(); printTable(list6);
 						        break;
-						    case "Ticket": // 빈 문자열인 경우
+						    case "Ticket": 
 						    	TicketDao dao7 = new TicketDao();
 								ArrayList<Ticket> list7 = dao7.selectList(); printTable(list7);
 						        break;
-						    case "Venue": // 빈 문자열인 경우
+						    case "Venue": 
 						    	VenueDao dao8 = new VenueDao();								System.out.println("=====전체조회====="); //전체 조회해서 list에 담기
 								ArrayList<Venue> list8 = dao8.selectList(); printTable(list8);
 						        break;
@@ -206,8 +206,17 @@ public class UserInterface extends JFrame {
 		printTable.setBounds(195, 366, 95, 23);
 		contentPane.add(printTable);
 		
+		JButton clearResult = new JButton("clearResult");
+		clearResult.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				resultField.setText("");
+				System.out.println("테이블지움");
+			}
+		});
 		
-
+		clearResult.setFont(new Font("휴먼편지체", Font.BOLD, 12));
+		clearResult.setBounds(354, 366, 95, 23);
+		contentPane.add(clearResult);
 
 		////////////////////////////////////////////////////
 		/* Application menus and queries 부분 */
@@ -270,17 +279,22 @@ public class UserInterface extends JFrame {
 								//////////
 						        break;
 						    case "ConcertShowing": // 빈 문자열인 경우
+						        System.out.println("구현 안 함");
 						        break;
 						    case "Customer": // 빈 문자열인 경우
-
+						        System.out.println("구현 안 함");
 						        break;
 						    case "SalesLocation": // 빈 문자열인 경우
+						        System.out.println("구현 안 함");
 						        break;
 						    case "Seat": // 빈 문자열인 경우
+						        System.out.println("구현 안 함");
 						        break;
 						    case "Ticket": // 빈 문자열인 경우
+						        System.out.println("구현 안 함");
 						        break;
 						    case "Venue": // 빈 문자열인 경우
+						        System.out.println("구현 안 함");
 						        break;
 						    // 다른 case 문들 추가 가능
 						    default:
