@@ -27,14 +27,17 @@ public class UserInterface extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField head;
-
+	private JTextArea resultField  ;
 	/**
 	 * Launch the application.
 	 */
-	private static void printTable(ArrayList<?> list) {
+	private void printTable(ArrayList<?> list) {
+		resultField.setText("");// 수정x
+		resultField.append("=====전체조회=====\n");
 		for (Object dto : list) {
 			System.out.println(dto);
-			
+				
+			resultField.append(dto.toString()+'\n');// 이곳 수정: 이곳에 결과 텍스트 출력
 		}
 	}
 
@@ -81,7 +84,7 @@ public class UserInterface extends JFrame {
 		scrollPane.setBounds(78, 86, 313, 134);
 		contentPane.add(scrollPane);
 
-		JTextArea resultField = new JTextArea();
+		 resultField = new JTextArea();
 		resultField.setLineWrap(true);
 		scrollPane.setViewportView(resultField);
 
@@ -244,45 +247,37 @@ public class UserInterface extends JFrame {
 						switch (s) {
 						    case "Area": // 빈 문자열인 경우
 						    	AreaDao dao = new AreaDao();
-								System.out.println("=====전체조회====="); //전체 조회해서 list에 담기
 								ArrayList<Area> list = dao.selectList(); printTable(list);
 								
 						        break;
 						    case "Cashier": // 빈 문자열인 경우
 						    	CashierDao dao2 = new CashierDao();
-								System.out.println("=====전체조회====="); //전체 조회해서 list에 담기
 								ArrayList<Cashier> list2 = dao2.selectList(); printTable(list2);
 
 						        break;
 						    case "ConcertShowing": // 빈 문자열인 경우
 						    	ConcertShowingDao dao3 = new ConcertShowingDao();
-								System.out.println("=====전체조회====="); //전체 조회해서 list에 담기
 								ArrayList<ConcertShowing> list3 = dao3.selectList(); printTable(list3);
 						        break;
 						    case "Customer": // 빈 문자열인 경우
 						    	CustomerDao dao4 = new CustomerDao();
-								System.out.println("=====전체조회====="); //전체 조회해서 list에 담기
 								ArrayList<Customer> list4 = dao4.selectList(); printTable(list4);
 
 						        break;
 						    case "SalesLocation": // 빈 문자열인 경우
 						    	SalesLocationDao dao5 = new SalesLocationDao();
-								System.out.println("=====전체조회====="); //전체 조회해서 list에 담기
 								ArrayList<SalesLocation> list5 = dao5.selectList(); printTable(list5);
 						        break;
 						    case "Seat": // 빈 문자열인 경우
 						    	SeatDao dao6 = new SeatDao();
-								System.out.println("=====전체조회====="); //전체 조회해서 list에 담기
 								ArrayList<Seat> list6 = dao6.selectList(); printTable(list6);
 						        break;
 						    case "Ticket": // 빈 문자열인 경우
 						    	TicketDao dao7 = new TicketDao();
-								System.out.println("=====전체조회====="); //전체 조회해서 list에 담기
 								ArrayList<Ticket> list7 = dao7.selectList(); printTable(list7);
 						        break;
 						    case "Venue": // 빈 문자열인 경우
-						    	VenueDao dao8 = new VenueDao();
-								System.out.println("=====전체조회====="); //전체 조회해서 list에 담기
+						    	VenueDao dao8 = new VenueDao();								System.out.println("=====전체조회====="); //전체 조회해서 list에 담기
 								ArrayList<Venue> list8 = dao8.selectList(); printTable(list8);
 						        break;
 						    // 다른 case 문들 추가 가능
