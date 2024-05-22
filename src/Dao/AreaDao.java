@@ -11,6 +11,40 @@ public class AreaDao {
 	private String user = UrlUserPassword.user;
 	private String password = UrlUserPassword.password;
 
+	//insert
+    public ArrayList<Area> insertArea(String areaCode, String areaDescription, BigDecimal price) {
+        // 1. JDBC Driver 로딩
+        try {
+            Class.forName(driver);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        ArrayList<Area> list = new ArrayList<>(); // Initialize the ArrayList
+
+        String sql = "INSERT INTO AREA (Area_Code, Area_Description, Price) VALUES (?, ?, ?)"; // SQL statement
+
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // Set the values for the prepared statement
+            pstmt.setString(1, areaCode);
+            pstmt.setString(2, areaDescription);
+            pstmt.setBigDecimal(3, price);
+
+            // Execute the update
+            pstmt.executeUpdate();
+
+            // Optionally, you can retrieve the inserted record and add it to the list
+            Area area = new Area(areaCode, areaDescription, price);
+            list.add(area);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }	
 	//회원 전체 조회 
 	public ArrayList<Area> selectList(){
 	    //1. JDBC Driver 로딩

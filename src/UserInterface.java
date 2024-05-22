@@ -1,5 +1,7 @@
 import databases.*;
 import Dao.*;
+import java.util.Scanner;
+import java.math.BigDecimal;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
@@ -27,13 +29,12 @@ public class UserInterface extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField head;
-	private JTextArea resultField  ;
+	private static JTextArea resultField  ;
 	/**
 	 * Launch the application.
 	 */
-	private void printTable(ArrayList<?> list) {
+	private static void printTable(ArrayList<?> list) {
 		resultField.setText("");// 수정x
-		resultField.append("=====전체조회=====\n");
 		for (Object dto : list) {
 			System.out.println(dto);
 				
@@ -51,8 +52,6 @@ public class UserInterface extends JFrame {
 		 * System.out.println("=====전체조회====="); //전체 조회해서 list에 담기
 		 * ArrayList<SalesLocation> list = dao.selectList(); printTable(list);
 		 */
-
-		//////////
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -80,11 +79,13 @@ public class UserInterface extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
+		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(78, 86, 313, 134);
 		contentPane.add(scrollPane);
 
-		 resultField = new JTextArea();
+	 	resultField = new JTextArea();
 		resultField.setLineWrap(true);
 		scrollPane.setViewportView(resultField);
 
@@ -96,104 +97,15 @@ public class UserInterface extends JFrame {
 		contentPane.add(head);
 		head.setColumns(5);
 
-		////////////////////////////////////////////////////
-		/* Application menus and queries 부분 */
-		JButton insertButton = new JButton("Insert");
-		insertButton.setBounds(23, 263, 95, 23);
-		insertButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				////////////
-
-				/* 이곳에 menu SQL 구현 */
-
-				////////////
-
-				resultField.setText("");// 수정x
-				resultField.append("응애");// 이곳 수정: 이곳에 결과 텍스트 출력
-			}
-		});
-		insertButton.setFont(new Font("휴먼매직체", Font.PLAIN, 12));
-		contentPane.add(insertButton);
-
-		JButton selectButtonVersionA = new JButton("Select(version A)");
-		selectButtonVersionA.setBounds(23, 230, 211, 23);
-		selectButtonVersionA.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				////////////
-
-				/* 이곳에 menu SQL 구현 */
-
-				////////////
-				resultField.setText("");// 수정x
-				resultField.append("응애");// 이곳 수정: 이곳에 결과 텍스트 출력
-
-			}
-		});
-		selectButtonVersionA.setFont(new Font("휴먼매직체", Font.PLAIN, 12));
-		contentPane.add(selectButtonVersionA);
-
-		JButton selectButtonVersionB = new JButton("Select(version B)");
-		selectButtonVersionB.setBounds(246, 230, 202, 23);
-		selectButtonVersionB.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				////////////
-
-				/* 이곳에 menu SQL 구현 */
-
-				////////////
-				resultField.setText("");// 수정x
-				resultField.append("응애");// 이곳 수정: 이곳에 결과 텍스트 출력
-
-			}
-		});
-		selectButtonVersionB.setFont(new Font("휴먼매직체", Font.PLAIN, 12));
-		contentPane.add(selectButtonVersionB);
-
-		JButton updateButton = new JButton("Update");
-		updateButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				////////////
-
-				/* 이곳에 menu SQL 구현 */
-
-				////////////
-				resultField.setText("");// 수정x
-				resultField.append("응애");// 이곳 수정: 이곳에 결과 텍스트 출력
-
-			}
-		});
-		updateButton.setBounds(195, 263, 95, 23);
-		updateButton.setFont(new Font("휴먼매직체", Font.PLAIN, 12));
-		contentPane.add(updateButton);
-
-		JButton deleteButton = new JButton("Delete");
-		deleteButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				////////////
-
-				/* 이곳에 menu SQL 구현 */
-
-				////////////
-				resultField.setText("");// 수정x
-				resultField.append("응애");// 이곳 수정: 이곳에 결과 텍스트 출력
-
-			}
-		});
-		deleteButton.setBounds(353, 263, 95, 23);
-		deleteButton.setFont(new Font("휴먼매직체", Font.PLAIN, 12));
-		contentPane.add(deleteButton);
-		////////////////////////////////////////////////////
-		JLabel smileImage = new JLabel("");
-		smileImage.setBounds(124, 10, 240, 303);
-		smileImage.setIcon(new ImageIcon(
-				"E:\\3\uD559\uB1442\uD559\uAE30\\\uB370\uBCA0\\TeamProject\\Database_2024_1\\Images\\\uC778\uC0C1\uD53C\uC790\uD558\uD558\uD558\uD558.png"));
-		contentPane.add(smileImage);
+		
 
 		JLayeredPane layeredPane = new JLayeredPane();
 		layeredPane.setBounds(23, 306, 425, 52);
 		contentPane.add(layeredPane);
 		layeredPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-
+		
+	
+		
 		JRadioButton selectSALES_LOCATION = new JRadioButton("SalesLocation");
 		selectSALES_LOCATION.setFont(new Font("굴림", Font.PLAIN, 10));
 		layeredPane.add(selectSALES_LOCATION);
@@ -293,7 +205,142 @@ public class UserInterface extends JFrame {
 		printTable.setFont(new Font("휴먼편지체", Font.BOLD, 12));
 		printTable.setBounds(195, 366, 95, 23);
 		contentPane.add(printTable);
+		
+		
 
+
+		////////////////////////////////////////////////////
+		/* Application menus and queries 부분 */
+		JButton insertButton = new JButton("Insert");
+		insertButton.setBounds(23, 263, 95, 23);
+		insertButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				////////////
+
+				/* 이곳에 menu SQL 구현 */
+
+				////////////
+				for (JRadioButton button : ratioButtons) {
+					if (button.isSelected()) {
+						// 선택됐어용!
+						// System.out.println("선택됐다시마스"); 
+						String s = button.getText();// 문자열 변수를 선언하고 값을 할당
+						Scanner scanner = new Scanner(System.in);
+						switch (s) {
+						    case "Area": // 빈 문자열인 경우
+						    	//insert 테스트
+								//Scanner 객체 생성
+								AreaDao dao = new AreaDao();
+								System.out.println("areaCode를 입력하세요: "); //전체 조회해서 list에 담기
+								String areaCode = scanner.nextLine();
+								System.out.println("areaDescription를 입력하세요: "); //전체 조회해서 list에 담기
+								String areaDescription = scanner.nextLine();
+								System.out.println("price를 입력하세요: "); //전체 조회해서 list에 담기
+								BigDecimal price = scanner.nextBigDecimal();
+								
+								dao.insertArea (areaCode , areaDescription,price); 
+								
+								// Scanner 객체 닫기
+					       		scanner.close();
+								//////////
+								
+						        break;
+						    case "Cashier": // 빈 문자열인 경우
+						   		
+						        break;
+						    case "ConcertShowing": // 빈 문자열인 경우
+						        break;
+						    case "Customer": // 빈 문자열인 경우
+
+						        break;
+						    case "SalesLocation": // 빈 문자열인 경우
+						        break;
+						    case "Seat": // 빈 문자열인 경우
+						        break;
+						    case "Ticket": // 빈 문자열인 경우
+						        break;
+						    case "Venue": // 빈 문자열인 경우
+						        break;
+						    // 다른 case 문들 추가 가능
+						    default:
+						        break; // 기본 동작
+						}}}
+				
+			}
+		});
+		insertButton.setFont(new Font("휴먼매직체", Font.PLAIN, 12));
+		contentPane.add(insertButton);
+
+		JButton selectButtonVersionA = new JButton("Select(version A)");
+		selectButtonVersionA.setBounds(23, 230, 211, 23);
+		selectButtonVersionA.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				////////////
+
+				/* 이곳에 menu SQL 구현 */
+
+				////////////
+
+
+			}
+		});
+		selectButtonVersionA.setFont(new Font("휴먼매직체", Font.PLAIN, 12));
+		contentPane.add(selectButtonVersionA);
+
+		JButton selectButtonVersionB = new JButton("Select(version B)");
+		selectButtonVersionB.setBounds(246, 230, 202, 23);
+		selectButtonVersionB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				////////////
+
+				/* 이곳에 menu SQL 구현 */
+
+				////////////
+			
+			}
+		});
+		selectButtonVersionB.setFont(new Font("휴먼매직체", Font.PLAIN, 12));
+		contentPane.add(selectButtonVersionB);
+
+		JButton updateButton = new JButton("Update");
+		updateButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				////////////
+
+				/* 이곳에 menu SQL 구현 */
+
+				////////////
+		
+
+			}
+		});
+		updateButton.setBounds(195, 263, 95, 23);
+		updateButton.setFont(new Font("휴먼매직체", Font.PLAIN, 12));
+		contentPane.add(updateButton);
+
+		JButton deleteButton = new JButton("Delete");
+		deleteButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				////////////
+
+				/* 이곳에 menu SQL 구현 */
+
+				////////////
+		
+
+			}
+		});
+		deleteButton.setBounds(353, 263, 95, 23);
+		deleteButton.setFont(new Font("휴먼매직체", Font.PLAIN, 12));
+		contentPane.add(deleteButton);
+		////////////////////////////////////////////////////
+		
+		JLabel smileImage = new JLabel("");
+		smileImage.setBounds(124, 10, 240, 303);
+		smileImage.setIcon(new ImageIcon(
+				"E:\\3\uD559\uB1442\uD559\uAE30\\\uB370\uBCA0\\TeamProject\\Database_2024_1\\Images\\\uC778\uC0C1\uD53C\uC790\uD558\uD558\uD558\uD558.png"));
+		contentPane.add(smileImage);
+		
 		JLabel rainbowImage = new JLabel("");
 		rainbowImage.setIcon(new ImageIcon(
 				"E:\\3\uD559\uB1442\uD559\uAE30\\\uB370\uBCA0\\TeamProject\\Database_2024_1\\Images\\rainbow.png"));
@@ -305,6 +352,8 @@ public class UserInterface extends JFrame {
 				"E:\\3\uD559\uB1442\uD559\uAE30\\\uB370\uBCA0\\TeamProject\\Database_2024_1\\Images\\rainbow.png"));
 		rainbowImage2.setBounds(0, 231, 202, 158);
 		contentPane.add(rainbowImage2);
-
+		
+		
+		
 	}
 }

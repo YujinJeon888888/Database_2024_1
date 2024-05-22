@@ -1,7 +1,10 @@
 package Dao;
 
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
+
+import databases.Area;
 import databases.Cashier;
 
 public class CashierDao {
@@ -9,7 +12,8 @@ public class CashierDao {
 	private String url = UrlUserPassword.url;
 	private String user = UrlUserPassword.user;
 	private String password = UrlUserPassword.password;
-    // Cashier 전체 조회 
+
+	// Cashier 전체 조회 
     public ArrayList<Cashier> selectList() {
         // 1. JDBC Driver 로딩
         try {
