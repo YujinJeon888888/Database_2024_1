@@ -12,6 +12,44 @@ public class CashierDao {
 	private String url = UrlUserPassword.url;
 	private String user = UrlUserPassword.user;
 	private String password = UrlUserPassword.password;
+	//insert
+    public ArrayList<Cashier> insertCashier(String cashierId, int locationId, String cashierFirstName, String cashierLastName, String cashierGender, String counterNum) {
+        // 1. JDBC Driver 로딩
+        try {
+            Class.forName(driver);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        ArrayList<Cashier> list = new ArrayList<>(); // Initialize the ArrayList
+
+        String sql = "INSERT INTO CASHIER  (Cashier_ID, Location_ID, Cashier_FirstName, Cashier_LastName, Cashier_Gender, Counter_Num) VALUES (?, ?, ?, ?, ?, ?)"; // SQL statement
+
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // Set the values for the prepared statement
+            pstmt.setString(1, cashierId);
+            pstmt.setInt(2, locationId);
+            pstmt.setString(3, cashierFirstName);
+            pstmt.setString(4, cashierLastName);
+            pstmt.setString(5, cashierGender);
+            pstmt.setString(6, counterNum);
+
+
+            // Execute the update
+            pstmt.executeUpdate();
+
+            // Optionally, you can retrieve the inserted record and add it to the list
+            Cashier cashier = new Cashier(cashierId, locationId, cashierFirstName, cashierLastName, cashierGender, counterNum);
+            list.add(cashier);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }	
 
 	// Cashier 전체 조회 
     public ArrayList<Cashier> selectList() {

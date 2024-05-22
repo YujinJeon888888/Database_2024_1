@@ -246,7 +246,28 @@ public class UserInterface extends JFrame {
 								
 						        break;
 						    case "Cashier": // 빈 문자열인 경우
-						   		
+						   		//insert 테스트
+								//Scanner 객체 생성
+								CashierDao cashierDao = new CashierDao();
+								System.out.println("cashierId를 입력하세요: "); //전체 조회해서 list에 담기
+								String cashierId = scanner.nextLine();
+								System.out.println("locationId를 입력하세요: "); //전체 조회해서 list에 담기
+								int locationId = scanner.nextInt();
+								scanner.nextLine();//버퍼먹기
+								System.out.println("cashierFirstName를 입력하세요: "); //전체 조회해서 list에 담기
+								String cashierFirstName = scanner.nextLine();
+								System.out.println("cashierLastName를 입력하세요: "); //전체 조회해서 list에 담기
+								String cashierLastName = scanner.nextLine();
+								System.out.println("cashierGender를 입력하세요: "); //전체 조회해서 list에 담기
+								String cashierGender = scanner.nextLine();
+								System.out.println("counterNum를 입력하세요: "); //전체 조회해서 list에 담기
+								String counterNum = scanner.nextLine();
+								
+								cashierDao.insertCashier( cashierId,  locationId,  cashierFirstName,  cashierLastName,  cashierGender,  counterNum); 
+								
+								// Scanner 객체 닫기
+					       		scanner.close();
+								//////////
 						        break;
 						    case "ConcertShowing": // 빈 문자열인 경우
 						        break;
