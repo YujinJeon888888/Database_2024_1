@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import databases.SalesLocation;
 
 public class SalesLocationDao {
-    private String driver = "com.mysql.cj.jdbc.Driver";
-    private String url = "jdbc:mysql://127.0.0.1:3306/TeamProject?serverTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8";
-    private String user = "root";
-    private String password = "8501";
+	private String driver = UrlUserPassword.driver;
+	private String url = UrlUserPassword.url;
+	private String user = UrlUserPassword.user;
+	private String password = UrlUserPassword.password;
 
     // SalesLocation 전체 조회 
     public ArrayList<SalesLocation> selectList() {

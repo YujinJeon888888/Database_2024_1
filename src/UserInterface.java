@@ -37,12 +37,14 @@ public class UserInterface extends JFrame {
 	public static void main(String[] args) {
 		//////////
 		//db연결 test
+		
 		/*
 		 * SalesLocationDao dao = new SalesLocationDao();
 		 * 
 		 * System.out.println("=====전체조회====="); //전체 조회해서 list에 담기
 		 * ArrayList<SalesLocation> list = dao.selectList(); printTable(list);
 		 */
+		
 		//////////
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
