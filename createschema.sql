@@ -113,3 +113,25 @@ CREATE TABLE TICKET(
     INDEX idx_Purchased_Time (Purchased_Time),
     INDEX idx_Ticket_Type (Ticket_Type)
 );
+
+CREATE VIEW TicketPurchasedLocation AS
+    SELECT TICKET.Trans_No, CASHIER.Cashier_ID, CASHIER.Cashier_FirstName, CASHIER.Location_ID, SALES_LOCATION.Location_Description
+    FROM TICKET
+    JOIN CUSTOMER ON TICKET.Customer_ID = CUSTOMER.Customer_ID
+    JOIN CASHIER ON CUSTOMER.Cashier_ID = CASHIER.Cashier_ID
+    JOIN SALES_LOCATION ON CASHIER.Location_ID = SALES_LOCATION.Location_ID;
+
+CREATE VIEW Ticket_Venue AS
+    SELECT TICKET.Trans_No, VENUE.Venue_Description
+    FROM TICKET
+    JOIN CONCERT_SHOWING ON TICKET.Concert_Code = CONCERT_SHOWING.Concert_Code
+    JOIN VENUE ON CONCERT_SHOWING.Venue_Code = VENUE.Venue_Code;
+
+CREATE VIEW Ticket_Seat AS
+    SELECT Trans_No, Seat_No, Area_Code
+    FROM TICKET;
+
+CREATE VIEW ConcertVenue_View AS
+    SELECT CONCERT_SHOWING.Concert_Title, CONCERT_SHOWING.Concert_Date, VENUE.Venue_Description
+    FROM CONCERT_SHOWING
+    JOIN VENUE ON CONCERT_SHOWING.Venue_Code = VENUE.Venue_Code;
