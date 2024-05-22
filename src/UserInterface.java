@@ -29,20 +29,20 @@ public class UserInterface extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	private static void print(ArrayList<SalesLocation> list) {
+	private static void printTable(ArrayList<SalesLocation> list) {
 		for (SalesLocation dto : list) {
 			System.out.println(dto);
 		}
 	}
 	public static void main(String[] args) {
 		//////////
-		//db연결
-		SalesLocationDao dao = new SalesLocationDao();
-		
-		System.out.println("=====전체조회=====");
-		//전체 조회해서 list에 담기
-		ArrayList<SalesLocation> list = dao.selectList();
-		print(list);
+		//db연결 test
+		/*
+		 * SalesLocationDao dao = new SalesLocationDao();
+		 * 
+		 * System.out.println("=====전체조회====="); //전체 조회해서 list에 담기
+		 * ArrayList<SalesLocation> list = dao.selectList(); printTable(list);
+		 */
 		//////////
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
