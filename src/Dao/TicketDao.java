@@ -9,7 +9,37 @@ public class TicketDao {
 	private String url = UrlUserPassword.url;
 	private String user = UrlUserPassword.user;
 	private String password = UrlUserPassword.password;
+	 // insert
+    public void insertTicket(String transNo, String concertCode, String seatNo, String areaCode, String customerId,
+                             Date purchasedDate, Time purchasedTime, String ticketType, String ticketRefundable, BigDecimal discountedPrice) {
+        try {
+            Class.forName(driver);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
+        String sql = "INSERT INTO Ticket (Trans_No, Concert_Code, Seat_No, Area_Code, Customer_ID, Purchased_Date, Purchased_Time, Ticket_Type, Ticket_Refundable, Discounted_Price) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, transNo);
+            pstmt.setString(2, concertCode);
+            pstmt.setString(3, seatNo);
+            pstmt.setString(4, areaCode);
+            pstmt.setString(5, customerId);
+            pstmt.setDate(6, purchasedDate);
+            pstmt.setTime(7, purchasedTime);
+            pstmt.setString(8, ticketType);
+            pstmt.setString(9, ticketRefundable);
+            pstmt.setBigDecimal(10, discountedPrice);
+
+            pstmt.executeUpdate();
+            System.out.println("Ticket inserted successfully"); // 여기에 추가합니다
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 	//회원 전체 조회 
 	public ArrayList<Ticket> selectList(){
 	    //1. JDBC Driver 로딩

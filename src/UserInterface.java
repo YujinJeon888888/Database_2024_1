@@ -331,13 +331,55 @@ public class UserInterface extends JFrame {
 		                       
 						        break;
 						    case "SalesLocation": // 빈 문자열인 경우
-						    	System.out.println("구현 안 함");
+						    	SalesLocationDao salesLocationdao = new SalesLocationDao();
+		                        System.out.println("Location Description을 입력하세요: ");
+		                        String locationDescription = scanner.nextLine();
+		                        System.out.println("Location City를 입력하세요: ");
+		                        String locationCity = scanner.nextLine();
+		                        System.out.println("Location State를 입력하세요: ");
+		                        String locationState = scanner.nextLine();
+		                        System.out.println("Location PostCode를 입력하세요: ");
+		                        String locationPostCode = scanner.nextLine();
+		                        
+		                        salesLocationdao.insertSalesLocation(locationDescription, locationCity, locationState, locationPostCode);
 						        break;
 						    case "Seat": // 빈 문자열인 경우
-						        System.out.println("구현 안 함");
+						        SeatDao seatDao = new SeatDao();
+		                        System.out.println("Seat No를 입력하세요: ");
+		                        String seatNo = scanner.nextLine();
+		                        System.out.println("Area Code를 입력하세요: ");
+		                        String areaCode_SEAT = scanner.nextLine();
+		                        System.out.println("Seat Row를 입력하세요: ");
+		                        String seatRow = scanner.nextLine();
+		                        System.out.println("Seat Col를 입력하세요: ");
+		                        String seatCol = scanner.nextLine();
+		
+		                        seatDao.insertSeat(seatNo, areaCode_SEAT, seatRow, seatCol);
 						        break;
 						    case "Ticket": // 빈 문자열인 경우
-						        System.out.println("구현 안 함");
+						        TicketDao ticketDao = new TicketDao();
+		                        System.out.println("Trans No를 입력하세요: ");
+		                        String transNo = scanner.nextLine();
+		                        System.out.println("Concert Code를 입력하세요: ");
+		                        String concertCode_TICKET = scanner.nextLine();
+		                        System.out.println("Seat No를 입력하세요: ");
+		                        String seatNo_TICKET = scanner.nextLine();
+		                        System.out.println("Area Code를 입력하세요: ");
+		                        String ticketAreaCode = scanner.nextLine();
+		                        System.out.println("Customer ID를 입력하세요: ");
+		                        String customerId_TICKET = scanner.nextLine();
+		                        System.out.println("Purchased Date를 입력하세요 (yyyy-MM-dd): ");
+		                        Date purchasedDate = Date.valueOf(scanner.nextLine());
+		                        System.out.println("Purchased Time를 입력하세요 (HH:mm:ss): ");
+		                        Time purchasedTime = Time.valueOf(scanner.nextLine());
+		                        System.out.println("Ticket Type을 입력하세요: ");
+		                        String ticketType = scanner.nextLine();
+		                        System.out.println("Ticket Refundable을 입력하세요 (Available/Unavailable): ");
+		                        String ticketRefundable = scanner.nextLine();
+		                        System.out.println("Discounted Price를 입력하세요: ");
+		                        BigDecimal discountedPrice = new BigDecimal(scanner.nextLine());
+
+                        		ticketDao.insertTicket(transNo, concertCode_TICKET, seatNo_TICKET, ticketAreaCode, customerId_TICKET, purchasedDate, purchasedTime, ticketType, ticketRefundable, discountedPrice);
 						        break;
 						    case "Venue": // 빈 문자열인 경우
 						        System.out.println("구현 안 함");
