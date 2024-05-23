@@ -1,5 +1,6 @@
 import databases.*;
 import Dao.*;
+import java.sql.*;
 import java.util.Scanner;
 import java.math.BigDecimal;
 import java.awt.BorderLayout;
@@ -249,8 +250,7 @@ public class UserInterface extends JFrame {
 								
 								dao.insertArea (areaCode , areaDescription,price); 
 								
-								// Scanner 객체 닫기
-					       		scanner.close();
+								
 								//////////
 								
 						        break;
@@ -274,18 +274,64 @@ public class UserInterface extends JFrame {
 								
 								cashierDao.insertCashier( cashierId,  locationId,  cashierFirstName,  cashierLastName,  cashierGender,  counterNum); 
 								
-								// Scanner 객체 닫기
-					       		scanner.close();
+								
 								//////////
 						        break;
 						    case "ConcertShowing": // 빈 문자열인 경우
-						        System.out.println("구현 안 함");
+						        //insert 테스트
+								//Scanner 객체 생성
+								ConcertShowingDao concertShowingDao = new ConcertShowingDao();
+								System.out.println("concertCode를 입력하세요: "); //전체 조회해서 list에 담기
+								String concertCode = scanner.nextLine();
+								System.out.println("concertTitle를 입력하세요: "); //전체 조회해서 list에 담기
+								String concertTitle = scanner.nextLine();	
+								System.out.println("concertDate를 입력하세요: "); //전체 조회해서 list에 담기
+								String dateString = scanner.nextLine();
+						        // Convert the string to a java.sql.Date
+						        Date concertDate = Date.valueOf(dateString);
+					        	System.out.println("concertStartTime를 입력하세요: "); //전체 조회해서 list에 담기
+						        String startTimeString = scanner.nextLine();
+    							Time concertStartTime = Time.valueOf(startTimeString);
+    							System.out.println("concertEndTime를 입력하세요: "); //전체 조회해서 list에 담기
+						        String endTimeString = scanner.nextLine();
+    							Time concertEndTime = Time.valueOf(endTimeString);
+								System.out.println("venueCode를 입력하세요: "); //전체 조회해서 list에 담기
+								String venueCode = scanner.nextLine();	
+									
+								concertShowingDao.insertConcertShowing(  concertCode,  concertTitle,  concertDate,  concertStartTime,  concertEndTime,  venueCode); 
+								
+								
+								//////////
+						        
 						        break;
 						    case "Customer": // 빈 문자열인 경우
-						        System.out.println("구현 안 함");
+						        // insert Customer
+			                    CustomerDao customerDao = new CustomerDao();
+			                    System.out.println("customerId를 입력하세요: ");
+			                    String customerId = scanner.nextLine();
+			                    System.out.println("firstName를 입력하세요: ");
+			                    String firstName = scanner.nextLine();
+			                    System.out.println("lastName를 입력하세요: ");
+			                    String lastName = scanner.nextLine();
+			                    System.out.println("age를 입력하세요: ");
+			                    int age = scanner.nextInt();
+			                    scanner.nextLine(); // 버퍼 먹기
+			                    System.out.println("gender를 입력하세요: ");
+			                    String gender = scanner.nextLine();
+			                    System.out.println("phone를 입력하세요: ");
+			                    String phone = scanner.nextLine();
+			                    System.out.println("cashierId를 입력하세요: ");
+			                    String cashierId_CASHIER = scanner.nextLine();
+			                    System.out.println("locationId를 입력하세요: ");
+			                    int locationId_CASHIER = scanner.nextInt();
+			                    scanner.nextLine(); // 버퍼 먹기
+
+                        		customerDao.insertCustomer(customerId, firstName, lastName, age, gender, phone, cashierId_CASHIER, locationId_CASHIER);
+
+		                       
 						        break;
 						    case "SalesLocation": // 빈 문자열인 경우
-						        System.out.println("구현 안 함");
+						    	System.out.println("구현 안 함");
 						        break;
 						    case "Seat": // 빈 문자열인 경우
 						        System.out.println("구현 안 함");
@@ -314,7 +360,6 @@ public class UserInterface extends JFrame {
 
 				/* 이곳에 menu SQL 구현 */
 
-				////////////
 
 
 			}
