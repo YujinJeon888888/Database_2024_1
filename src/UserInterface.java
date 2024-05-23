@@ -382,7 +382,20 @@ public class UserInterface extends JFrame {
                         		ticketDao.insertTicket(transNo, concertCode_TICKET, seatNo_TICKET, ticketAreaCode, customerId_TICKET, purchasedDate, purchasedTime, ticketType, ticketRefundable, discountedPrice);
 						        break;
 						    case "Venue": // 빈 문자열인 경우
-						        System.out.println("구현 안 함");
+						        VenueDao venueDao = new VenueDao();
+		                        System.out.println("venueCode를 입력하세요: ");
+		                        String venueCode_VENUE = scanner.nextLine();
+		                        System.out.println("venueDescription를 입력하세요: ");
+		                        String venueDescription = scanner.nextLine();
+		                        System.out.println("venueCity를 입력하세요: ");
+		                        String venueCity = scanner.nextLine();
+		                        System.out.println("venueState를 입력하세요: ");
+		                        String venueState = scanner.nextLine();
+		  						System.out.println("venuePostCode를 입력하세요: ");
+		                        String venuePostCode = scanner.nextLine();
+		                        
+		                        venueDao.insertVenue( venueCode_VENUE,  venueDescription,  venueCity,  venueState,  venuePostCode);
+
 						        break;
 						    // 다른 case 문들 추가 가능
 						    default:
