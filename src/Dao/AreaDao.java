@@ -34,7 +34,7 @@ public class AreaDao {
 
             // Execute the update
             pstmt.executeUpdate();
-
+            System.out.println("Area inserted successfully"); // 여기에 추가합니다
             // Optionally, you can retrieve the inserted record and add it to the list
             Area area = new Area(areaCode, areaDescription, price);
             list.add(area);

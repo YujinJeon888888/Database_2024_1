@@ -39,7 +39,7 @@ public class CashierDao {
 
             // Execute the update
             pstmt.executeUpdate();
-
+            System.out.println("Cashier inserted successfully"); // 여기에 추가합니다
             // Optionally, you can retrieve the inserted record and add it to the list
             Cashier cashier = new Cashier(cashierId, locationId, cashierFirstName, cashierLastName, cashierGender, counterNum);
             list.add(cashier);

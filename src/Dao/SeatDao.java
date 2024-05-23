@@ -10,7 +10,31 @@ public class SeatDao {
 	private String url = UrlUserPassword.url;
 	private String user = UrlUserPassword.user;
 	private String password = UrlUserPassword.password;
+	// insert
+    public void insertSeat(String seatNo, String areaCode, String seatRow, String seatCol) {
+        try {
+            Class.forName(driver);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
+        String sql = "INSERT INTO Seat (Seat_No, Area_Code, Seat_Row, Seat_Col) VALUES (?, ?, ?, ?)";
+
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, seatNo);
+            pstmt.setString(2, areaCode);
+            pstmt.setString(3, seatRow);
+            pstmt.setString(4, seatCol);
+
+            pstmt.executeUpdate();
+            System.out.println("Seat inserted successfully"); // 여기에 추가합니다
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 	//회원 전체 조회 
 	public ArrayList<Seat> selectList(){
 	    //1. JDBC Driver 로딩
