@@ -466,7 +466,16 @@ public class UserInterface extends JFrame {
 				/* 이곳에 menu SQL 구현 */
 
 				////////////
-		
+				Scanner scanner = new Scanner(System.in);
+				MenuNotInsert updateMenu = new MenuNotInsert();
+				System.out.println("sales_location에 대한 update입니다!\n");
+				System.out.println("locationDescription를 입력하세요: ");
+				String locationDescription= scanner.nextLine();
+				System.out.println("locationID를 입력하세요: ");
+				String locationID= scanner.nextLine();
+				//업데이트실행
+				updateMenu.update(locationDescription, locationID );
+				
 
 			}
 		});

@@ -17,7 +17,37 @@ public class MenuNotInsert {
 	private String user = UrlUserPassword.user;
 	private String password = UrlUserPassword.password;
 	
-	//select: 사용자 입력을 기반으로 aggregation, group by를 사용하는 쿼리
+	//update
+    public void update(String locationDescription, String locationID ) {
+        // 1. JDBC Driver 로딩
+        try {
+            Class.forName(driver);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        String sql = "update sales_location set location_description = ? where location_id = ?"; // SQL statement
+
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // Set the values for the prepared statement
+            pstmt.setString(1, locationDescription);
+            pstmt.setString(2, locationID);
+            // Execute the update
+            pstmt.executeUpdate();
+            System.out.println("updated successfully"); // 여기에 추가합니다
+            // Optionally, you can retrieve the inserted record and add it to the list
+            // Process the result set and add to the list
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }	
+
+	
+	
+	//delete
     public void deleteCashierID(String casherID) {
         // 1. JDBC Driver 로딩
         try {
