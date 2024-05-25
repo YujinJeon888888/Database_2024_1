@@ -423,11 +423,11 @@ public class UserInterface extends JFrame {
 				System.out.println("concert_title를 입력하세요: ");
 				String concertTitle = scanner.nextLine();
 				
-				ArrayList<ConcertVenueView> concertVenueView =
-				selectMenu.selectConcertTitleDate(concertTitle);//여기에 selectmenu리턴값 넣기
+				ArrayList<String> resultTable =
+				selectMenu.selectConcertTitleDateVenueCode(concertTitle);//여기에 selectmenu리턴값 넣기
 				
 				//프린트 (콘솔 & resultField)
-				printTable(concertVenueView);
+				printTable(resultTable);
 			}
 		});
 		selectButtonVersionA.setFont(new Font("휴먼매직체", Font.PLAIN, 12));

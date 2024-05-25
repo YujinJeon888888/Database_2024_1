@@ -87,7 +87,7 @@ public class MenuNotInsert {
     }	
 
 	//select: 사용자 입력을 기반으로 조인 및 뷰를 사용하는 쿼리 - ConcertVenueView
-    public ArrayList<ConcertVenueView> selectConcertTitleDate(String concertTitle) {
+    public ArrayList<String> selectConcertTitleDateVenueCode(String concertTitle) {
         // 1. JDBC Driver 로딩
         try {
             Class.forName(driver);
@@ -95,9 +95,9 @@ public class MenuNotInsert {
             e.printStackTrace();
         }
 
-        ArrayList<ConcertVenueView> list = new ArrayList<>(); // Initialize the ArrayList
+        ArrayList<String> list = new ArrayList<>(); // Initialize the ArrayList
 
-        String sql = "select cv.concert_title, cv.concert_date, cv.venue_description"
+        String sql = "select cv.concert_title, cv.venue_description, cs.Venue_Code"
         		+ " from concertvenue_view cv"
         		+ " join concert_showing cs on cv.concert_title = cs.concert_title"
         		+ " where cs.concert_title=?"; // SQL statement
@@ -114,12 +114,12 @@ public class MenuNotInsert {
             // Process the result set and add to the list
             while (rs.next()) {
                 String title = rs.getString("Concert_Title");
-                Date date = rs.getDate("Concert_Date");
                 String venueDescription = rs.getString("Venue_Description");
-
-                ConcertVenueView concertVenueView = new ConcertVenueView(title, date, venueDescription);
+                String Venue_Code = rs.getString("Venue_Code");
                 
-                list.add(concertVenueView);
+                
+                
+                list.add(title+"|\t"+venueDescription+"|\t"+Venue_Code+"\n");
             }    
        
         } catch (SQLException e) {
