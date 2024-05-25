@@ -1,5 +1,7 @@
 import databases.*;
 import Dao.*;
+import MenuNotInsert.*;
+
 import java.sql.*;
 import java.util.Scanner;
 import java.math.BigDecimal;
@@ -412,11 +414,20 @@ public class UserInterface extends JFrame {
 		selectButtonVersionA.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				////////////
-
 				/* 이곳에 menu SQL 구현 */
-
-
-
+				////////////
+				////select: 사용자 입력을 기반으로 조인 및 뷰를 사용하는 쿼리 - ConcertVenueView
+				Scanner scanner = new Scanner(System.in);
+				MenuNotInsert selectMenu = new MenuNotInsert();
+				System.out.println("ConcertVenueView에 대한 select입니다!\n");
+				System.out.println("concert_title를 입력하세요: ");
+				String concertTitle = scanner.nextLine();
+				
+				ArrayList<String> resultTable =
+				selectMenu.selectConcertTitleDateVenueCode(concertTitle);//여기에 selectmenu리턴값 넣기
+				
+				//프린트 (콘솔 & resultField)
+				printTable(resultTable);
 			}
 		});
 		selectButtonVersionA.setFont(new Font("휴먼매직체", Font.PLAIN, 12));
@@ -431,7 +442,17 @@ public class UserInterface extends JFrame {
 				/* 이곳에 menu SQL 구현 */
 
 				////////////
-			
+				Scanner scanner = new Scanner(System.in);
+				MenuNotInsert selectMenu = new MenuNotInsert();
+				System.out.println("Ticket에 대한 select입니다!\n");
+				System.out.println("Concert_Code를 입력하세요: ");
+				String concertCode= scanner.nextLine();
+				
+				ArrayList<String> result=
+				selectMenu.selectConcertCodeCOUNT(concertCode);//여기에 selectmenu리턴값 넣기
+				
+				//프린트 (콘솔 & resultField)
+				printTable(result);
 			}
 		});
 		selectButtonVersionB.setFont(new Font("휴먼매직체", Font.PLAIN, 12));
@@ -445,7 +466,16 @@ public class UserInterface extends JFrame {
 				/* 이곳에 menu SQL 구현 */
 
 				////////////
-		
+				Scanner scanner = new Scanner(System.in);
+				MenuNotInsert updateMenu = new MenuNotInsert();
+				System.out.println("sales_location에 대한 update입니다!\n");
+				System.out.println("locationDescription를 입력하세요: ");
+				String locationDescription= scanner.nextLine();
+				System.out.println("locationID를 입력하세요: ");
+				String locationID= scanner.nextLine();
+				//업데이트실행
+				updateMenu.update(locationDescription, locationID );
+				
 
 			}
 		});
@@ -461,7 +491,15 @@ public class UserInterface extends JFrame {
 				/* 이곳에 menu SQL 구현 */
 
 				////////////
-		
+				Scanner scanner = new Scanner(System.in);
+				MenuNotInsert deleteMenu = new MenuNotInsert();
+				System.out.println("Customer에 대한 delete입니다!\n");
+				System.out.println("Cashier_ID를 입력하세요: ");
+				String casherID= scanner.nextLine();
+				
+				//삭제 실행
+				deleteMenu.deleteCashierID(casherID);
+			
 
 			}
 		});
