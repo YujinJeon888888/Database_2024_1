@@ -441,7 +441,17 @@ public class UserInterface extends JFrame {
 				/* 이곳에 menu SQL 구현 */
 
 				////////////
-			
+				Scanner scanner = new Scanner(System.in);
+				SelectMenu selectMenu = new SelectMenu();
+				System.out.println("Ticket에 대한 select입니다!\n");
+				System.out.println("Concert_Code를 입력하세요: ");
+				String concertCode= scanner.nextLine();
+				
+				ArrayList<String> result=
+				selectMenu.selectConcertCodeCOUNT(concertCode);//여기에 selectmenu리턴값 넣기
+				
+				//프린트 (콘솔 & resultField)
+				printTable(result);
 			}
 		});
 		selectButtonVersionB.setFont(new Font("휴먼매직체", Font.PLAIN, 12));

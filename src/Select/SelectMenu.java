@@ -16,7 +16,47 @@ public class SelectMenu {
 	private String url = UrlUserPassword.url;
 	private String user = UrlUserPassword.user;
 	private String password = UrlUserPassword.password;
-	
+	//select: 사용자 입력을 기반으로 조인 및 뷰를 사용하는 쿼리 - ConcertVenueView
+    public ArrayList<String> selectConcertCodeCOUNT(String concertCode) {
+        // 1. JDBC Driver 로딩
+        try {
+            Class.forName(driver);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        ArrayList<String> list = new ArrayList<>(); // Initialize the ArrayList
+
+        String sql = "SELECT Concert_Code, COUNT(*) AS Total_Tickets_Sold FROM TICKET	WHERE Concert_Code =?  GROUP BY Concert_Code"; // SQL statement
+
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // Set the values for the prepared statement
+            pstmt.setString(1, concertCode);
+            // Execute the update
+            ResultSet rs = pstmt.executeQuery();
+            System.out.println("Selected successfully"); // 여기에 추가합니다
+            // Optionally, you can retrieve the inserted record and add it to the list
+            // Process the result set and add to the list
+            while (rs.next()) {
+                String Concert_Code = rs.getString("Concert_Code");
+                int Total_Tickets_Sold = rs.getInt("Total_Tickets_Sold");
+
+                String concertCode_RESULT = Concert_Code;
+                int totalTicketsSold=Total_Tickets_Sold;
+               
+                
+                list.add(concertCode_RESULT+"\t|"+totalTicketsSold+"\n");
+            }    
+       
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }	
+
 	//select: 사용자 입력을 기반으로 조인 및 뷰를 사용하는 쿼리 - ConcertVenueView
     public ArrayList<ConcertVenueView> selectConcertTitleDate(String concertTitle) {
         // 1. JDBC Driver 로딩
