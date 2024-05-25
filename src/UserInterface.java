@@ -1,5 +1,6 @@
 import databases.*;
 import Dao.*;
+import Select.*;
 import java.sql.*;
 import java.util.Scanner;
 import java.math.BigDecimal;
@@ -412,11 +413,20 @@ public class UserInterface extends JFrame {
 		selectButtonVersionA.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				////////////
-
 				/* 이곳에 menu SQL 구현 */
-
-
-
+				////////////
+				////select: 사용자 입력을 기반으로 조인 및 뷰를 사용하는 쿼리 - ConcertVenueView
+				Scanner scanner = new Scanner(System.in);
+				SelectMenu selectMenu = new SelectMenu();
+				System.out.println("ConcertVenueView에 대한 select입니다!\n");
+				System.out.println("concert_title를 입력하세요: ");
+				String concertTitle = scanner.nextLine();
+				
+				ArrayList<ConcertVenueView> concertVenueView =
+				selectMenu.selectConcertTitleDate(concertTitle);//여기에 selectmenu리턴값 넣기
+				
+				//프린트 (콘솔 & resultField)
+				printTable(concertVenueView);
 			}
 		});
 		selectButtonVersionA.setFont(new Font("휴먼매직체", Font.PLAIN, 12));
